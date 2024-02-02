@@ -1,4 +1,4 @@
-import { createContext,useEffect,useState } from "react";
+import { createContext,useState } from "react";
 
 const NotasContext = createContext()
 
@@ -6,22 +6,32 @@ function NotasProvider ({children}) {
     const [dataForm, setDataForm] = useState()
 
 
-    useEffect(() => {
-        // Actualizar el localStorage cada vez que dataForm cambie
-        const storedData = JSON.parse(localStorage.getItem('notas')) || [];
-        storedData.push(dataForm)
-        localStorage.setItem('notas', JSON.stringify(storedData));
-      }, [dataForm]);
       
+    const loadData = (data) => {
+            const storedData = JSON.parse(localStorage.getItem('notas')) || [];
+            storedData.push(data);
+            localStorage.setItem('notas', JSON.stringify(storedData))
+            setDataForm({...dataForm, storedData})
+    }
 
-      const handleChange = (data) => {
-        setDataForm({...dataForm,
-            data})
-      };
+    const deleteNota = (elemento) => {
+        const storedData = JSON.parse(localStorage.getItem('notas')) || []
+        console.log(elemento)
+        const notaEliminar = storedData.findIndex(e => e.cuerpoNota === elemento)
+        console.log(notaEliminar)
+        if (notaEliminar !== -1) {
+            storedData.splice(notaEliminar, 1)
+        }
+        console.log(storedData)
+        localStorage.setItem('notas', JSON.stringify(storedData))
+        setDataForm({...dataForm, storedData})
+    }
+
 
       const data = {
         dataForm,
-        handleChange
+        loadData,
+        deleteNota
       }
 
       return(
