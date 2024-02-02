@@ -2,6 +2,7 @@ import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import { useForm } from "react-hook-form"
 import { useNotasContext } from '../../hooks/useNotasContext'
+import './NoteCreator.css'
 
 
 const NoteCreator = () => {
@@ -12,14 +13,14 @@ const NoteCreator = () => {
 
   return (
     <>
-        <Form onSubmit={handleSubmit( (data) =>{
+        <Form className='container gx-1 formulario' onSubmit={handleSubmit( (data) =>{
             console.log(data)
             loadData(data)
             reset()
         } )}>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
+      <Form.Group className="mb-3 inputForm" controlId="formBasicEmail">
         <Form.Label></Form.Label>
-        <Form.Control {...register("cuerpoNota")} type="text" placeholder="Algo para recordar" />
+        <Form.Control className='input' {...register("cuerpoNota")} type="text" placeholder="Algo para recordar" />
       </Form.Group>
 
       <Button variant="primary" type="submit">

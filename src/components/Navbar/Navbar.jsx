@@ -1,8 +1,8 @@
-
+import './Navbar.css'
 
 const Navbar = () => {
   return (
-    <div>Mis notas</div>
+    <div className='title'>Mis notas</div>
   )
 }
 
