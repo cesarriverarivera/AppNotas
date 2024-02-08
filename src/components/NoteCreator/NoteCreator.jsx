@@ -14,8 +14,9 @@ const NoteCreator = () => {
   return (
     <>
         <Form className='container gx-1 formulario' onSubmit={handleSubmit( (data) =>{
-            console.log(data)
-            loadData(data)
+            if(data.cuerpoNota.trim() !== "") {
+              loadData(data) 
+            }
             reset()
         } )}>
       <Form.Group className="mb-3 inputForm" controlId="formBasicEmail">
